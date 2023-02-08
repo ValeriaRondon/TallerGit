@@ -1,0 +1,25 @@
+x=runif(120,0,10)
+y=100+x^2.3+rnorm(120,0,5)
+plot(x,y)
+
+c=5
+hinge=NULL
+for(i in 1:120){hinge[i]=max(0,x[i]-c)}
+
+X=cbind(x,hinge)
+data=data.frame(y,X)
+
+reg_spline=lm(y~.,data=data)
+reg_spline
+coef=reg_spline$coef
+
+zz=seq(0,10,by=0.02)
+ff=NULL
+hingef=NULL
+for(i in 1:length(zz)){hingef[i]=max(0,zz[i]-c)}
+
+ff=coef[1]+coef[2]*zz+coef[3]*hingef
+
+plot(zz,ff,type="l",lwd=2)
+points(x,y,col=2)
+

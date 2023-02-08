@@ -1,0 +1,38 @@
+#Generacion de inputs (x)
+  x=seq(1,5,by=0.05)
+  n=length(x) #numero de datos
+  
+#Funcion de media de Y dado X
+  mean=rep(2,n)+1.3*x
+
+  plot(x,mean,type="l",col=2,lwd=2)
+
+#Generacion de datos (X,Y)
+  y=mean+rnorm(n,0,.8)
+  plot(x,y)
+  points(x,mean,type="l",col=2,lwd=2)  #adicion de media
+
+
+#Generacion de nuevas muestras (1 y 2)
+  x1=runif(10,1,5)
+  x2=runif(10,1,5)
+  n2=10   #tamano de nuevas muestras
+  mean1=rep(2,n2)+1.3*x1
+  mean2=rep(2,n2)+1.3*x2
+
+
+par(mfrow=(c(1,2)))
+
+
+#Grafico de muestra 1
+  y1=mean1+rnorm(n2,0,.5)
+  plot(x1,y1,xlim=c(1,5),ylim=c(3.,8.5),main="Muestra 1",xlab="x",ylab="y",lwd=2)
+  points(x,mean,type="l",col=2,lwd=2)
+  abline(lm(y1~x1)$coefficients[1],lm(y1~x1)$coefficients[2],col=4,lwd=2)
+
+
+#Grafico de muestra 2
+  y2=mean2+rnorm(n2,0,.5)
+  plot(x2,y2,xlim=c(1,5),ylim=c(3.,8.5),main="Muestra 2",xlab="x",ylab="y",lwd=2)
+  points(x,mean,type="l",col=2,lwd=2)
+  abline(lm(y2~x2)$coefficients[1],lm(y2~x2)$coefficients[2],col=4,lwd=2)

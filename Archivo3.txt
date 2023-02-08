@@ -1,0 +1,17 @@
+data=read.table("measure.txt")
+head(data)
+
+y=data$Chest
+
+
+x1=data$Waist
+
+x2=data$Hips
+
+X=cbind(rep(1,20),x1,x2)
+
+xtx=t(X)%*%X
+
+H=solve(xtx)
+
+beta_hat=H%*%t(X)%*%y
